@@ -31,7 +31,8 @@ runs:
       uses: aws-actions/configure-aws-credentials@v4
       with:
         aws-region: us-east-1
-        role-session-name: GitHubAction-${{ github.repository }}-${{ github.ref_name }}-${{ github.run_number }}-${{ github.actor }}
+        role-session-name: GitHubAction-${{ github.owner }}-${{ github.run_number }}-${{ github.actor }}
+        # role-session-name: GitHubAction-${{ github.repository }}-${{ github.ref_name }}-${{ github.run_number }}-${{ github.actor }}
         role-to-assume: ${{ inputs.iam-role-arn }}
 
     - name: Set GitHub Path
