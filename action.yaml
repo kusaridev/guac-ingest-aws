@@ -40,4 +40,9 @@ runs:
       run: |
         curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-amd64 -o /tmp/guaccollect
         chmod +x /tmp/guaccollect
-        /tmp/guaccollect files --pubsub-addr ${{ inputs.pubsub-addr}} --blob-addr ${{ inputs.blob-addr }} ${{ inputs.files }}
+        cat << EOF > guac.yaml
+        poll: false
+        pubsub-addr: ${{ inputs.pubsub-addr}}
+        blob-addr: ${{ inputs.blob-addr }}
+        EOF
+        /tmp/guaccollect files ${{ inputs.files }}
