@@ -35,9 +35,9 @@ runs:
         # role-session-name: GitHubAction-${{ github.repository }}-${{ github.ref_name }}-${{ github.run_number }}-${{ github.actor }}
         role-to-assume: ${{ inputs.iam-role-arn }}
 
-    - name: Set GitHub Path
+    - name: Ingest files
       shell: bash
       run: |
         curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-amd64 -o /tmp/guaccollect
         chmod +x /tmp/guaccollect
-        /tmp/guaccollect files ${{ inputs.files }} --pubsub-addr ${{ inputs.pubsub-addr}} --blob-addr ${{ inputs.blob-addr }}
+        /tmp/guaccollect files --pubsub-addr ${{ inputs.pubsub-addr}} --blob-addr ${{ inputs.blob-addr }} ${{ inputs.files }}
