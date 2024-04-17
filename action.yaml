@@ -36,5 +36,8 @@ runs:
         role-to-assume: ${{ inputs.iam-role-arn }}
 
     - name: Set GitHub Path
-      run: ls -la ${{ inputs.files }}
       shell: bash
+      run:
+        - curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-amd64 -o /tmp/guaccollect
+        - chmod +x /tmp/guaccollect
+        - /tmp/guaccollect files ${{ inputs.files }} --pubsub-addr ${{ inputs.pubsub-addr}} --blob-addr ${{ inputs.blob-addr }}
