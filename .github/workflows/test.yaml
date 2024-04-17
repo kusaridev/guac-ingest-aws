@@ -27,7 +27,8 @@ jobs:
       - name: ingest to guac
         uses: ./
         with:
-          files: ./guac-data/docs
+        #   files: ./guac-data/docs
+          files: ./test/spdx_vuln.json
           iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha
           blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
           pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-clearalpha?region=us-east-1&awssdk=v2
