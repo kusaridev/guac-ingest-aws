@@ -17,7 +17,7 @@ inputs:
     default: awssqs://sqs.[region].amazonaws.com/[account_id]/[queue_name]?region=[region]
   guac-version:
     description: 'Release version of guacsec/guac to use to source the guac cli'
-    required: true
+    required: false
     default: 'v0.5.2'
 # outputs:
 #   console_out:
@@ -32,7 +32,6 @@ runs:
       with:
         aws-region: us-east-1
         role-session-name: GitHubAction-${{ github.repository_owner }}-${{ github.run_number }}-${{ github.actor }}
-        # role-session-name: GitHubAction-${{ github.repository }}-${{ github.ref_name }}-${{ github.run_number }}-${{ github.actor }}
         role-to-assume: ${{ inputs.iam-role-arn }}
 
     - name: Ingest files

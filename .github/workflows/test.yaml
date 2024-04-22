@@ -28,7 +28,6 @@ jobs:
         uses: ./
         with:
           files: ./guac-data/top-dh-sboms
-        #   files: ./test/spdx_vuln.json
         #   files: ./guac-data/docs
           iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha
           blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
