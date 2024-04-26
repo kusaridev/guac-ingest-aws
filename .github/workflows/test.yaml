@@ -28,13 +28,16 @@ jobs:
         uses: ./
         continue-on-error: true
         with:
-          files: ./guac-data/top-dh-sboms
-        #   files: ./guac-data/docs
+        #   files: ./guac-data/top-dh-sboms
+          files: ./guac-data/docs
         #   iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha
-          iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha-fail
-          blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
-          pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-clearalpha?region=us-east-1&awssdk=v2
-          simulate-failure: "true"
+        #   iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha
+        #   blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
+        #   pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-clearalpha?region=us-east-1&awssdk=v2
+        #   simulate-failure: "true"
+          iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-kusari
+          blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-kusari?region=us-east-1
+          pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-kusari?region=us-east-1&awssdk=v2
 
       - name: last step
         shell: bash
