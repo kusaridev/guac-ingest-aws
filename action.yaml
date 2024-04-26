@@ -20,10 +20,9 @@ inputs:
     required: false
     default: 'v0.5.2'
   simulate-failure:
-    description: 'Whether to force the action to fail to simulate a failure case'
-    type: boolean
+    description: 'Set this (string) to true to force the action to fail'
     required: false
-    default: false
+    default: 'false'
 # outputs:
 #   console_out:
 #     description: 'raw console output from guacone command'
