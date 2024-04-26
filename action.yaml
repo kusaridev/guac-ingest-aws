@@ -22,7 +22,7 @@ inputs:
   simulate-failure:
     description: 'Set this (string) to true to force the action to fail'
     required: false
-    default: 'false'
+    # default: 'false'
 # outputs:
 #   console_out:
 #     description: 'raw console output from guacone command'
