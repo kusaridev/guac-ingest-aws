@@ -1,5 +1,11 @@
-name: 'GUAC Ingest'
+---
+name: 'GUAC Ingest AWS'
 description: 'Ingest files into Kusari hosted GUAC platform'
+branding:
+  icon: "shield"
+  color: "purple"
+author: 'Kusari'
+
 inputs:
   files:
     description: 'path to directory or specific file to ingest'
@@ -23,6 +29,10 @@ inputs:
     description: 'Set this (string) to true to force the action to fail'
     required: false
     default: 'false'
+
+outputs:
+  console_out:
+    description: 'raw console output from guaccollect command'
 
 runs:
   using: "composite"
