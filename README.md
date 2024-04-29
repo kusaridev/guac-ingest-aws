@@ -1,8 +1,4 @@
 # guac-ingest-aws action
-Github Action for ingesting SBOMs and Attestations into GUAC
-
-
-# GUAC action
 
 This Action ingests SBOMs and Attestations into
 [GUAC](https://github.com/guacsec/guac) as part of your github
