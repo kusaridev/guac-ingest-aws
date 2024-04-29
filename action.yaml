@@ -15,18 +15,14 @@ inputs:
     description: 'Pubsub address for triggering ingestion'
     required: true
     default: awssqs://sqs.[region].amazonaws.com/[account_id]/[queue_name]?region=[region]
-  guac-version:
-    description: 'Release version of guacsec/guac to use to source the guac cli'
-    required: false
-    default: 'v0.5.2'
+  # guac-version:
+  #   description: 'Release version of guacsec/guac to use to source the guac cli'
+  #   required: false
+  #   default: 'v0.5.2'
   simulate-failure:
     description: 'Set this (string) to true to force the action to fail'
     required: false
-    # default: 'false'
-# outputs:
-#   console_out:
-#     description: 'raw console output from guacone command'
-    # value: ${{ steps.random-number-generator.outputs.random-number }}
+    default: 'false'
 
 runs:
   using: "composite"
