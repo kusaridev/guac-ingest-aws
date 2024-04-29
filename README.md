@@ -52,7 +52,7 @@ steps:
 
 ### `console_out`
 
-Raw output of the guacone command
+Raw output of the guaccollect command
 
 # License
 
