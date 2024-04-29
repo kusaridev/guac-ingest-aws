@@ -35,9 +35,12 @@ jobs:
         #   blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
         #   pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-clearalpha?region=us-east-1&awssdk=v2
         #   simulate-failure: "true"
-          iam-role-arn: arn:aws:iam::484667909259:role/github-actions-sbom-ingestion-kusari
-          blob-addr: s3://kusari-guac-ingestion-dropbox-prod-us-east-1-kusari?region=us-east-1
-          pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/484667909259/guac-kusari?region=us-east-1&awssdk=v2
+        #   iam-role-arn: arn:aws:iam::484667909259:role/github-actions-sbom-ingestion-kusari
+        #   blob-addr: s3://kusari-guac-ingestion-dropbox-prod-us-east-1-kusari?region=us-east-1
+        #   pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/484667909259/guac-kusari?region=us-east-1&awssdk=v2
+          iam-role-arn: arn:aws:iam::484667909259:role/github-actions-sbom-ingestion-clearalpha
+          blob-addr: s3://kusari-guac-ingestion-dropbox-prod-us-east-1-clearalpha?region=us-east-1
+          pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/484667909259/guac-clearalpha?region=us-east-1&awssdk=v2
 
       - name: last step
         shell: bash
