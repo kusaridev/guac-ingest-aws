@@ -17,12 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
 
-      - name: clone guac-data
-        uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
-        with:
-          repository: 'guacsec/guac-data'
-          ref: 'main'
-          path: 'guac-data'
+    #   - name: clone guac-data
+    #     uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+    #     with:
+    #       repository: 'guacsec/guac-data'
+    #       ref: 'main'
+    #       path: 'guac-data'
 
       - name: ingest to guac
         uses: ./
@@ -34,7 +34,7 @@ jobs:
         #   iam-role-arn: arn:aws:iam::204753367867:role/github-actions-sbom-ingestion-clearalpha
         #   blob-addr: s3://kusari-guac-ingestion-dropbox-dev-us-east-1-clearalpha?region=us-east-1
         #   pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/204753367867/guac-clearalpha?region=us-east-1&awssdk=v2
-        #   simulate-failure: "true"
+          simulate-failure: "true"
         #   iam-role-arn: arn:aws:iam::484667909259:role/github-actions-sbom-ingestion-kusari
         #   blob-addr: s3://kusari-guac-ingestion-dropbox-prod-us-east-1-kusari?region=us-east-1
         #   pubsub-addr: awssqs://sqs.us-east-1.amazonaws.com/484667909259/guac-kusari?region=us-east-1&awssdk=v2
