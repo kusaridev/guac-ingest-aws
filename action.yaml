@@ -1,0 +1,64 @@
+---
+name: 'GUAC Ingest AWS'
+description: 'Ingest files into Kusari hosted GUAC platform'
+branding:
+  icon: "shield"
+  color: "purple"
+author: 'Kusari'
+
+inputs:
+  files:
+    description: 'path to directory or specific file to ingest'
+    required: true
+  iam-role-arn:
+    description: 'AWS IAM assumable role ARN - this role permits GitHub Action to perform ingestion operations'
+    required: true
+  blob-addr: 
+    description: 'Blob store address for uploading files for ingestion'
+    required: true
+    default: s3://[s3_bucket_name]?region=[region]
+  pubsub-addr:
+    description: 'Pubsub address for triggering ingestion'
+    required: true
+    default: awssqs://sqs.[region].amazonaws.com/[account_id]/[queue_name]?region=[region]
+  # guac-version:
+  #   description: 'Release version of guacsec/guac to use to source the guac cli'
+  #   required: false
+  #   default: 'v0.5.2'
+  simulate-failure:
+    description: 'Set this (string) to true to force the action to fail'
+    required: false
+    default: 'false'
+
+outputs:
+  console_out:
+    description: 'raw console output from guaccollect command'
+
+runs:
+  using: "composite"
+  steps:
+    - name: simulate failure 
+      if: ${{ inputs.simulate-failure == true || inputs.simulate-failure == 'true' }}
+      shell: bash
+      run: |
+        echo "Failing deliberately..."
+        exit 1
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: us-east-1
+        role-session-name: GitHubAction-${{ github.repository_owner }}-${{ github.run_number }}-${{ github.actor }}
+        role-to-assume: ${{ inputs.iam-role-arn }}
+
+    - name: Ingest files
+      shell: bash
+      run: |
+        curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-amd64 -o /tmp/guaccollect
+        chmod +x /tmp/guaccollect
+        cat << EOF > guac.yaml
+        service-poll: false
+        pubsub-addr: ${{ inputs.pubsub-addr}}
+        blob-addr: ${{ inputs.blob-addr }}
+        EOF
+        /tmp/guaccollect files ${{ inputs.files }}
