@@ -25,6 +25,9 @@ inputs:
   #   description: 'Release version of guacsec/guac to use to source the guac cli'
   #   required: false
   #   default: 'v0.5.2'
+  arch:
+    description: 'Processeor architecture which the GitHub Action runs on'
+    default: 'arm64'
   simulate-failure:
     description: 'Set this (string) to true to force the action to fail'
     required: false
@@ -54,7 +57,7 @@ runs:
     - name: Ingest files
       shell: bash
       run: |
-        curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-amd64 -o /tmp/guaccollect
+        curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-${{ inputs.arch }} -o /tmp/guaccollect
         chmod +x /tmp/guaccollect
         cat << EOF > guac.yaml
         service-poll: false
