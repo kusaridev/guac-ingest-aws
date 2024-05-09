@@ -50,5 +50,6 @@ runs:
       run: |
         FORM_POST_PAYLOAD="client_id=${{ inputs.client-id }}&client_secret=${{ inputs.client-secret }}&grant_type=client_credentials"
         jwt=$(curl ${{ inputs.auth-server-token-endpoint }} -d ${FORM_POST_PAYLOAD} | jq .access_token -r)
-        presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }} | jq .presignedUrl -r)
+        echo ''{"filename": "${{ inputs.files }}" }'' > payload
+        presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }}/presign -d @payload  | jq .presignedUrl -r)
         curl -v --upload-file ${{ inputs.files }} ${presignedUrl}
