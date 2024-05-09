@@ -52,7 +52,7 @@ runs:
         jwt=$(curl ${{ inputs.auth-server-token-endpoint }} -d ${FORM_POST_PAYLOAD} | jq .access_token -r)
         echo "got jwt $jwt"
         cat << EOF > payload
-        {"filename": "${{ inputs.files }}" }
+        {"filename": "spdx_vuln.json" }
         EOF
         cat payload
         presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }}/presign -d @payload  | jq .presignedUrl -r)
