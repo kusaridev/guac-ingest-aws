@@ -10,28 +10,26 @@ inputs:
   files:
     description: 'path to directory or specific file to ingest'
     required: true
-  iam-role-arn:
-    description: 'AWS IAM assumable role ARN - this role permits GitHub Action to perform ingestion operations'
-    required: true
-  blob-addr: 
-    description: 'Blob store address for uploading files for ingestion'
-    required: true
-    default: s3://[s3_bucket_name]?region=[region]
-  pubsub-addr:
-    description: 'Pubsub address for triggering ingestion'
-    required: true
-    default: awssqs://sqs.[region].amazonaws.com/[account_id]/[queue_name]?region=[region]
-  # guac-version:
-  #   description: 'Release version of guacsec/guac to use to source the guac cli'
-  #   required: false
-  #   default: 'v0.5.2'
-  arch:
-    description: 'Processeor architecture which the GitHub Action runs on'
-    default: 'arm64'
   simulate-failure:
     description: 'Set this (string) to true to force the action to fail'
     required: false
     default: 'false'
+  # tenant:
+  #   description: 'Kusari Hosted GUAC Tenant Name'
+  #   required: true
+  client-id:
+    description: 'OAuth2 Client Id'
+    required: true
+  client-secret:
+    description: 'OAuth2 Client Secret'
+    required: true
+  tenant-api-endpoint:
+    description: 'Kusari Hosted GUAC Tenant API Endpoint'
+    required: true
+  auth-server-token-endpoint:
+    description: 'Kusari OAuth2 Server Token Endpoint'
+    required: true
+    default: 'https://auth.us.kusari.cloud/oauth2/token'
 
 outputs:
   console_out:
@@ -47,21 +45,10 @@ runs:
         echo "Failing deliberately..."
         exit 1
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-region: us-east-1
-        role-session-name: GitHubAction-${{ github.repository_owner }}-${{ github.run_number }}-${{ github.actor }}
-        role-to-assume: ${{ inputs.iam-role-arn }}
-
     - name: Ingest files
       shell: bash
       run: |
-        curl -L https://github.com/guacsec/guac/releases/latest/download/guaccollect-linux-${{ inputs.arch }} -o /tmp/guaccollect
-        chmod +x /tmp/guaccollect
-        cat << EOF > guac.yaml
-        service-poll: false
-        pubsub-addr: ${{ inputs.pubsub-addr}}
-        blob-addr: ${{ inputs.blob-addr }}
-        EOF
-        /tmp/guaccollect files ${{ inputs.files }}
+        FORM_POST_PAYLOAD="client_id=${{ inputs.client-id }}&client_secret=${{ inputs.client-secret }}&grant_type=client_credentials"
+        jwt=$(curl ${{ inputs.auth-server-token-endpoint }} -d ${FORM_POST_PAYLOAD} | jq .access_token -r)
+        presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }} | jq .presignedUrl -r)
+        curl -v --upload-file ${{ inputs.files }} ${presignedUrl}
