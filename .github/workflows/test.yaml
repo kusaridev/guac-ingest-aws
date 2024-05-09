@@ -30,8 +30,8 @@ jobs:
         with:
         #   files: ./guac-data/top-dh-sboms
           files: ./spdx_vuln.json
-          client-id: ${{ inputs.GUAC_CLIENT_ID }}
-          client-secret: ${{ inputs.GUAC_CLIENT_ID }}
+          client-id: ${{ secrets.GUAC_CLIENT_ID }}
+          client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
           tenant-api-endpoint: ingesttest.dev.kusari.cloud
           auth-server-token-endpoint: https://auth.dev.kusari.cloud/oauth2/token
 
