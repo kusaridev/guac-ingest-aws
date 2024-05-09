@@ -32,7 +32,7 @@ jobs:
           files: ./spdx_vuln.json
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
-          tenant-api-endpoint: ingesttest.dev.kusari.cloud
+          tenant-api-endpoint: ingesttest.api.dev.kusari.cloud
           auth-server-token-endpoint: https://auth.dev.kusari.cloud/oauth2/token
 
       - name: last step
