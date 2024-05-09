@@ -33,7 +33,7 @@ jobs:
           client-id: ${{ inputs.GUAC_CLIENT_ID }}
           client-secret: ${{ inputs.GUAC_CLIENT_ID }}
           tenant-api-endpoint: ingesttest.dev.kusari.cloud
-          auth-server-token-endpoint: https://auth..dev.kusari.cloud/oauth2/token
+          auth-server-token-endpoint: https://auth.dev.kusari.cloud/oauth2/token
 
       - name: last step
         shell: bash
