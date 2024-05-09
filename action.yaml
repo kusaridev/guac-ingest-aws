@@ -55,6 +55,6 @@ runs:
         {"filename": "spdx_vuln.json" }
         EOF
         cat payload
-        presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }}/presign -d @payload  | jq .presignedUrl -r)
+        presignedUrl=$(curl -H \"Authorization: Bearer $jwt\" ${{ inputs.tenant-api-endpoint }}/presign -d @payload  | jq .presignedUrl -r)
         echo $presigndUrl
         curl -v --upload-file ${{ inputs.files }} ${presignedUrl}
