@@ -61,4 +61,4 @@ runs:
         presignedUrl=$(curl -H "Authorization: Bearer $jwt" ${{ inputs.tenant-api-endpoint }}/presign -d @payload  | jq .presignedUrl -r)
 
         # Upload file
-        curl --upload-file ${{ inputs.files }} $presignedUrl
+        curl -v --upload-file ${{ inputs.files }} $presignedUrl
