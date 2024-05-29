@@ -29,7 +29,8 @@ jobs:
         continue-on-error: true
         with:
         #   files: ./guac-data/top-dh-sboms
-          files: spdx_vuln.json
+          # files: spdx_vuln.json
+          files: sha256_05be5b338d0f4ad0639eac33b17960f880b6d8975ec6b401e7924c715a69df5f
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
           tenant-api-endpoint: https://ingesttest.api.dev.kusari.cloud
