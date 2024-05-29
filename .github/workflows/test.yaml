@@ -30,7 +30,7 @@ jobs:
         with:
         #   files: ./guac-data/top-dh-sboms
           # files: spdx_vuln.json
-          files: sha256_05be5b338d0f4ad0639eac33b17960f880b6d8975ec6b401e7924c715a69df5f
+          files: sha256_d60639472cba7949f7bcbc41f6c50a2897fa71b070efcb9b0a8a6760bc7eeb16
           client-id: ${{ secrets.GUAC_CLIENT_ID }}
           client-secret: ${{ secrets.GUAC_CLIENT_SECRET }}
           tenant-api-endpoint: https://ingesttest.api.dev.kusari.cloud
